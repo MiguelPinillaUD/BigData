@@ -181,14 +181,50 @@ Se incrementaron las épocas de 5 a 15 para asegurar un mejor entrenamiento del 
 Se mantuvieron los parámetros principales del modelo, como el optimizador (`sgd`), la función de pérdida (`categoricalCrossentropy`), y las capas originales.
 
 
-### * A.1 Cambios efectuados primer experimento
+### * B.1 Curvas comparativas de precisión obtenidas dado el primer experimento
+
+Para este primer experimento se obtuvo la siguiente curva:
+
+![gra1](https://pbs.twimg.com/media/GdcFGIwXMAAXt7p?format=png&name=small)
+
+Para este primer experimento, el código puede no haber funcionado correctamente por varias razones. En primer lugar, pudieron haber problemas al procesar las imágenes del conjunto de datos MNIST debido a la falta de manejo adecuado posiblemnte de los datos, o el uso incorrecto de las coordenadas para obtener las imágenes del lienzo. Por otra parte, la asignación de los datos de las imágenes a datasetBytesBuffer podría no haberse hecho correctamente, ya que la conversión de los valores de píxeles podría no haberse realizado de manera eficiente. Finalmente, segun algunos fallos, también es posible que haya fallos relacionados con la configuración de TensorFlow.js o con la memoria al tratar de cargar y entrenar el modelo con los datos.
 
 
-### * A.1 Cambios efectuados primer experimento
+### * B.2 Curvas comparativas de precisión obtenidas dado el segundo experimento
+
+Para este segundo experimento se obtuvo la siguiente curva:
+![gra1](https://pbs.twimg.com/media/GdcFJvYW8AAKu5M?format=png&name=small)
+
+
+Para este experimento, el código que se probo, no genero buenos resultados debido a un número bajo de épocas (5), aunque mas adelante se aumentaron y no dieron alguna mejoria. Además, pudo tambien hacer falta, una normalización adecuada de los datos y también, la ausencia de técnicas de regularización como Dropout pudo haber afectado el rendimiento. 
+
+### * B.3 Curvas comparativas de precisión obtenidas dado el tercer experimento
+Para este tercer experimento se obtuvo la siguiente curva:
+
+![gra1](https://pbs.twimg.com/media/GdcFRDpWQAAHCR3?format=png&name=small)
+
+
+Para este experimento en el que se hizo la tercer parte de cambios, el modelo no logró superar el 90% de precisión probablemente debido a varios factores. En primer lugar, el uso del optimizador sgd (gradiente descendente estocástico) podría estar limitando la convergencia del modelo, ya que optimizadores como Adam son más eficaces para este tipo de tareas auqnue anteriormente no funciono como se queria. Además, el uso de averagePooling2d en lugar de maxPooling2d podría estar restando rendimiento, ya que maxPooling2d tiende a ser más efectivo para la extracción de características. Otro punto es que el número de filtros en las capas convolucionales (6 y 16) es relativamente bajo, lo que limita la capacidad del modelo para aprender características complejas de las imágenes, aunque anterimente se probo con mayores valores, la tasa de perdida aumentaba y por eso no se continuo por ese camino. Asimismo, las unidades en las capas densas (120 y 84) podrían no ser suficientes para capturar la complejidad de los datos. 
+
+---
+
+## 3. Propose Solutions:
+* Improvement of the current implementation that could help achieve higher accuracy.
+
+Para este caso, si bien no se obtuvo lo esperado con los experimentos anteriores, una última solución que se podria probar, es cambiar directamente el modelo usado por ejemplo, por los siguientes:
+
+* ResNet (Redes Residuales): Las cuales son muy efectivas para tareas de clasificación de imágenes, especialmente con redes profundas.
+* DenseNet: En donde, este modelo, utiliza conexiones densas entre capas, lo que permite un mejor flujo de gradientes y puede mejorar la precisión.
+* InceptionNet: Por otra parte, este modelo utiliza bloques de diferentes tamaños de convolución, lo que le permite capturar características de múltiples escalas.
+* Redes Neuronales Profundas (DNN): FInalmente, se puede probar con redes completamente conectadas profundas combinadas con técnicas de regularización como dropout.
+
+
+Aún así, un modelo que podria servir teniendo en cuenta todos los cambios que se efectuaron es uno que combine los dos priemros experimentos, con el último experiemnto, de los primeros se puede tener en cuenta el cambio en los parámetros como el tamño de los filtros y del kernel, y por otro lado tomar la metodología del tercero en relación a aumentar el número de épocas. 
+
+De lo anterior, a pesar de que se puso a correr, este es muy lento para cambiar de época y no se logro visualizar el resultado a tiempo, aún así, el archivo html se subira el repositorio.
 
 
 
-### * A.1 Cambios efectuados primer experimento
 
 
 
